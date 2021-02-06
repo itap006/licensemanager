@@ -8,14 +8,12 @@ interface Props {}
 
 const Main = (props: Props) => {
   return (
-    <div>
+    <div className="content h-screen overflow-hidden relative flex flex-col">
       <Navbar />
-      <div className="content h-screen overflow-hidden relative">
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/license/:id" component={Licenses} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/license/:id" component={Licenses} />
+      </Switch>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import Button from 'components/Button';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
@@ -21,22 +22,24 @@ const Home = (props: Props) => {
 
   return (
     <div className="h-full overflow-auto">
-      <div>
-        <button onClick={() => setOpen(true)}>Create</button>
+      <div className="py-2 px-4">
+        <Button variant="blue" onClick={() => setOpen(true)}>
+          Create
+        </Button>
       </div>
-      <div>
+      <div className="mt-2 px-4">
         {data?.map((e) => (
-          <div key={e.id} className="flex items-center">
-            <div
-              className="cursor-pointer"
-              onDoubleClick={() => {
+          <div key={e.id} className="flex items-center mb-2">
+            <div className="cursor-pointer w-40" onClick={() => history.push('/license/' + e.id)}>
+              {e.name}
+            </div>
+            <i
+              className="fa fa-edit ml-1 cursor-pointer text-blue-400"
+              onClick={() => {
                 setUpdateData(e);
                 setUpdate(true);
               }}
-              onClick={() => history.push('/license/' + e.id)}
-            >
-              {e.name}
-            </div>
+            />
             <i
               className="fa fa-trash ml-1 cursor-pointer text-red-600"
               onClick={() => {

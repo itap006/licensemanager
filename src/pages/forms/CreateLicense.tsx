@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { produce } from 'immer';
 import Modal from 'components/Modal';
+import Button from 'components/Button';
+import Input from 'components/Input';
 
 interface Props {
   close: () => void;
@@ -34,12 +36,9 @@ const CreateLicense = ({ close, id }: Props) => {
   return (
     <Modal title="Create License" close={close}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="expiry"></label>
-          <input id="expiry" name="expiry" type="date" value={formData.expiry} onChange={handleChange} />
-        </div>
-        <div>
-          <button>Submit</button>
+        <Input label="Expiry" name="expiry" type="date" value={formData.expiry} onChange={handleChange} />
+        <div className="mt-2">
+          <Button>Submit</Button>
         </div>
       </form>
     </Modal>

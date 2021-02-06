@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { produce } from 'immer';
 import Modal from 'components/Modal';
+import Input from 'components/Input';
+import Button from 'components/Button';
 
 interface Props {
   close: () => void;
@@ -37,18 +39,12 @@ const CreateOrganisation = ({ close, data }: Props) => {
   return (
     <Modal title="Create Organisation" close={close}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name"></label>
-          <input id="name" name="name" value={formData.name} onChange={handleChange} />
-        </div>
+        <Input label="Name" name="name" value={formData.name} onChange={handleChange} />
         {!data && (
-          <div>
-            <label htmlFor="passPhrase"></label>
-            <input id="passPhrase" name="passPhrase" value={formData.passPhrase} onChange={handleChange} />
-          </div>
+          <Input className="mt-2" label="Pass Phrase" name="passPhrase" value={formData.passPhrase} onChange={handleChange} />
         )}
-        <div>
-          <button>Submit</button>
+        <div className="mt-2">
+          <Button>Submit</Button>
         </div>
       </form>
     </Modal>

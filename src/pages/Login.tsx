@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-// import './Login.scss';
-
 import { Redirect } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 import Toast from 'Utils/Toast';
-import { loginSuccess, loginFail } from 'redux/actions';
-
+import { loginSuccess } from 'redux/actions';
 import { useMutation } from 'react-query';
-
 import axios from 'axios';
+import Input from 'components/Input';
+import Button from 'components/Button';
 
-const Login = ({ success, fail, authenticated, location }: any) => {
+const Login = ({ success, authenticated, location }: any) => {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
 
@@ -23,9 +20,6 @@ const Login = ({ success, fail, authenticated, location }: any) => {
   const { mutate: handleLogin, isLoading } = useMutation(handleLoginAsync, {
     onSuccess: (data: any) => {
       success(data);
-    },
-    onError: () => {
-      fail();
     },
   });
 
@@ -41,33 +35,31 @@ const Login = ({ success, fail, authenticated, location }: any) => {
     if (type === 'pass') setPass(e.target.value);
   };
 
-  //the referrer means go back to the url you tried to visit. It was added in the protected route
   if (authenticated) return <Redirect to={location.state?.referrer.pathname || '/'} />;
 
   return (
-    <div className="login">
-      <div className="loginleft">
-        <i className="feather icon-power"></i>
-      </div>
-      <div className="loginform">
+    <div className="h-screen flex items-center justify-center">
+      <div className="">
         <form onSubmit={handleSubmit} className="logininside">
-          <i className="feather icon-unlock"></i>
-          <span className="loginname">Login</span>
-          <input onChange={(e) => handleChange(e, 'user')} type="text" placeholder="Username" />
-          <input onChange={(e) => handleChange(e, 'pass')} type="password" placeholder="Password" />
-          <div className="loginsubmit">
-            {!isLoading ? (
-              <button type="submit">login</button>
-            ) : (
-              <div
-                style={{
-                  display: 'inline-block',
-                  height: '20px',
-                  width: '20px',
-                }}
-                className="slick-loader"
-              ></div>
-            )}
+          <div className="mb-2 text-center">Login</div>
+          <Input
+            className="w-60 mb-2"
+            onChange={(e) => handleChange(e, 'user')}
+            type="text"
+            label="Username"
+            placeholder="Username"
+          />
+          <Input
+            className="w-60 mb-2"
+            onChange={(e) => handleChange(e, 'pass')}
+            type="password"
+            label="Password"
+            placeholder="Password"
+          />
+          <div className="flex justify-center">
+            <Button variant="blue" type="submit">
+              {isLoading ? 'logging in' : 'login'}
+            </Button>
           </div>
         </form>
       </div>
@@ -82,7 +74,6 @@ const mapState = (state: any) => {
 const mapDispatch = (dispatch: any) => {
   return {
     success: (data: any) => dispatch(loginSuccess(data)),
-    fail: () => dispatch(loginFail()),
   };
 };
 

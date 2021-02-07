@@ -2,6 +2,20 @@ import React from 'react';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
 
+const bgMap = {
+  default: 'bg-white',
+  success: 'bg-green-400',
+  error: 'bg-red-500',
+  warning: 'bg-yellow-400',
+};
+
+const textMap = {
+  default: 'text-black',
+  success: 'text-white',
+  error: 'text-white',
+  warning: 'text-black',
+};
+
 export const Toast = ({
   duration = 2000,
   component,
@@ -11,23 +25,17 @@ export const Toast = ({
   duration?: null | number;
   component?: (onClose: () => void) => JSX.Element;
   msg?: string;
-  type?: 'success' | 'success-outline' | 'default' | 'primary' | 'danger' | 'danger-outline' | 'warning';
+  type?: 'default' | 'success' | 'error' | 'warning';
   notify?: boolean;
 }) => {
-  const bgColor = `slick-alert alert-${type}`;
-  let icon: any;
-
-  type === 'success' || type === 'success-outline' ? (icon = 'alert-icon outline feather icon-check-circle') : (icon = '');
-
   toaster.notify(
     ({ onClose }: any) =>
       component ? (
         component(onClose)
       ) : (
-        <div className={bgColor}>
-          <i className={icon} onClick={onClose}></i>
+        <div className={`${bgMap[type]} ${textMap[type]} p-1 px-2 rounded`}>
           <span>{msg}</span>
-          <i className="feather icon-x alert-icon" onClick={onClose}></i>
+          <i className="fa fa-times ml-2" onClick={onClose}></i>
         </div>
       ),
     {

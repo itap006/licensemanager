@@ -3,18 +3,18 @@ import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { produce } from 'immer';
 import Modal from 'components/Modal';
-import Button from 'components/Button';
 import Input from 'components/Input';
+import Button from 'components/Button';
 
 interface Props {
   close: () => void;
-  ids: string[];
+  data?: any;
 }
 
-const CreateLicense = ({ close, ids }: Props) => {
-  const [formData, setFormData] = useState({ productId: ids[0], organisationId: ids[1], expiry: '' });
+const CreateProduct = ({ close, data }: Props) => {
+  const [formData, setFormData] = useState({ name: data?.name ?? '' });
 
-  const { mutate: createLicense } = useMutation((data: any) => mutate('generatelicense', data), {
+  const { mutate: createOrUpdateProduct } = useMutation((data: any) => mutate('createorupdateproduct', data), {
     onSuccess: () => {
       close();
     },
@@ -30,13 +30,16 @@ const CreateLicense = ({ close, ids }: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createLicense(formData);
+    if (data) {
+      return createOrUpdateProduct({ name: formData.name, id: data.id });
+    }
+    createOrUpdateProduct(formData);
   };
 
   return (
-    <Modal title="Create License" close={close}>
+    <Modal title="Create Organisation" close={close}>
       <form onSubmit={handleSubmit}>
-        <Input label="Expiry" name="expiry" type="date" value={formData.expiry} onChange={handleChange} />
+        <Input label="Name" name="name" value={formData.name} onChange={handleChange} />
         <div className="mt-2">
           <Button>Submit</Button>
         </div>
@@ -45,4 +48,4 @@ const CreateLicense = ({ close, ids }: Props) => {
   );
 };
 
-export default CreateLicense;
+export default CreateProduct;

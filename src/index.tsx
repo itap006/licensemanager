@@ -7,10 +7,6 @@ import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import store from './redux/store';
-import { url } from 'appConstants';
-import axios from 'axios';
-
-axios.defaults.baseURL = url;
 
 ReactDOM.render(
   <React.StrictMode>

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-input{
+input,select{
   border: solid .1px grey;
   border-radius: .2rem;
   padding:.1rem .5rem;
@@ -15,6 +15,9 @@ button{
   border-radius: .2rem;
   color: white;
 }
+button:focus{
+  outline: none;
+ }
 
 .bg-color1{
   background-color: #535468

@@ -1,6 +1,9 @@
 import Home from 'pages/Home';
 import Licenses from 'pages/Licenses';
-import Navbar from 'pages/Navbar';
+import Navbar from 'layout/Navbar';
+import Organisations from 'pages/Organisations';
+import POs from 'pages/POs';
+import Products from 'pages/Products';
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
@@ -12,7 +15,10 @@ const Main = (props: Props) => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/license/:id" component={Licenses} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/organisations" component={Organisations} />
+        <Route exact path="/productorganisations" component={POs} />
+        <Route exact path="/license/:pId/:oId" component={Licenses} />
       </Switch>
     </div>
   );

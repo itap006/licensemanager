@@ -45,7 +45,7 @@ export const setup = () => {
           });
         } else {
           if (response.data.detail) {
-            Toast({ msg: response.data.detail, type: 'danger', notify: true });
+            Toast({ msg: response.data.detail, type: 'error', notify: true });
           }
         }
         return response;

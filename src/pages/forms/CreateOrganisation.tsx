@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CreateOrganisation = ({ close, data }: Props) => {
-  const [formData, setFormData] = useState({ name: data?.name ?? '', passPhrase: '' });
+  const [formData, setFormData] = useState({ name: data?.name ?? '' });
 
   const { mutate: createOrUpdateOrganisation } = useMutation((data: any) => mutate('createorupdateorganisation', data), {
     onSuccess: () => {
@@ -40,9 +40,6 @@ const CreateOrganisation = ({ close, data }: Props) => {
     <Modal title="Create Organisation" close={close}>
       <form onSubmit={handleSubmit}>
         <Input label="Name" name="name" value={formData.name} onChange={handleChange} />
-        {!data && (
-          <Input className="mt-2" label="Pass Phrase" name="passPhrase" value={formData.passPhrase} onChange={handleChange} />
-        )}
         <div className="mt-2">
           <Button>Submit</Button>
         </div>

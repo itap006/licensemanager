@@ -61,6 +61,7 @@ const Login = ({ success, authenticated, location }: any) => {
               {isLoading ? 'logging in' : 'login'}
             </Button>
           </div>
+          <div>(USER: admin@gmail.com PASS: admin)</div>
         </form>
       </div>
     </div>

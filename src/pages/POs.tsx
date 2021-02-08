@@ -33,12 +33,12 @@ const POs = (props: Props) => {
       <div className="mt-2">
         {data?.map((e) => (
           <div key={`${e.productId}${e.organisationId}`} className="flex items-center mb-2">
-            <div className="cursor-pointer w-40" onClick={() => history.push(`/license/${e.productId}/${e.organisationId}`)}>
+            <div className="cursor-pointer" onClick={() => history.push(`/license/${e.productId}/${e.organisationId}`)}>
               {e.organisation.name}-{e.product.name}
             </div>
             <Key keys={[e.publicKey, e.privateKey]} />
             <i
-              className="fa fa-trash ml-1 cursor-pointer text-red-600"
+              className="fa fa-trash ml-2 cursor-pointer text-red-600"
               onClick={() => {
                 if (!window.confirm('This will be deleted permanently! Continue?')) return;
                 deletePO({ pId: e.productId, oId: e.organisationId });

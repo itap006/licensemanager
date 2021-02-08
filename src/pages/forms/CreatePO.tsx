@@ -13,7 +13,7 @@ interface Props {
 }
 
 const CreatePO = ({ close }: Props) => {
-  const [formData, setFormData] = useState({ productId: '', organisationId: '', passPhrase: '' });
+  const [formData, setFormData] = useState({ productId: '', organisationId: '' });
 
   const { data: organisations } = useQuery<any[]>('getorganisations');
   const { data: products } = useQuery<any[]>('getproducts');
@@ -61,7 +61,6 @@ const CreatePO = ({ close }: Props) => {
           options={products || []}
           className="mt-2"
         />
-        <Input className="mt-2" label="PassPhrase" name="passPhrase" value={formData.passPhrase} onChange={handleChange} />
         <div className="mt-2">
           <Button>Submit</Button>
         </div>

@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CreateLicense = ({ close, ids }: Props) => {
-  const [formData, setFormData] = useState({ productId: ids[0], organisationId: ids[1], expiry: '' });
+  const [formData, setFormData] = useState({ productId: ids[0], organisationId: ids[1], expiry: '', count: '1' });
 
   const { mutate: createLicense } = useMutation((data: any) => mutate('generatelicense', data), {
     onSuccess: () => {
@@ -23,7 +23,7 @@ const CreateLicense = ({ close, ids }: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLElement & { name: any; value: any }>) => {
     setFormData(
       produce((draft) => {
-        draft[e.target.name] = e.target.value;
+        draft[e.target.name] = e.target.name === 'count' ? +e.target.value : e.target.value;
       })
     );
   };
@@ -37,6 +37,8 @@ const CreateLicense = ({ close, ids }: Props) => {
     <Modal title="Create License" close={close}>
       <form onSubmit={handleSubmit}>
         <Input label="Expiry" name="expiry" type="date" value={formData.expiry} onChange={handleChange} />
+        <Input label="Count" name="count" value={formData.count} onChange={handleChange} />
+
         <div className="mt-2">
           <Button>Submit</Button>
         </div>

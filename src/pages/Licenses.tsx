@@ -7,11 +7,11 @@ import { useParams } from 'react-router-dom';
 import CreateLicense from './forms/CreateLicense';
 
 const Licenses = () => {
-  const { pId, oId } = useParams<{ pId: string; oId: string }>();
+  const { id } = useParams<{ id: string }>();
 
   const [open, setOpen] = useState(false);
 
-  const { data, refetch } = useQuery<any[]>(`getlicenses/${pId}/${oId}`);
+  const { data, refetch } = useQuery<any[]>(`getlicenses/${id}`);
 
   return (
     <Container>
@@ -20,8 +20,10 @@ const Licenses = () => {
       </div>
       <div className="mt-2 flex flex-wrap">
         {data?.map((e) => (
-          <div className="p-3 rounded mb-3 w-max ml-2 border border-solid border-gray-400">
+          <div key={e.id} className="p-3 rounded mb-3 w-max ml-2 border border-solid border-gray-400">
             <div className="mb-2">Created: {e.createdDate}</div>
+            <div className="w-60 break-words">Name: {e.name}</div>
+            <div className="w-60 break-words">Email: {e.email}</div>
             <Divider />
             <div className="w-60 break-words">{e.licenseKey}</div>
           </div>
@@ -29,7 +31,7 @@ const Licenses = () => {
       </div>
       {open && (
         <CreateLicense
-          ids={[pId, oId]}
+          id={id}
           close={() => {
             refetch();
             setOpen(false);

@@ -8,11 +8,11 @@ import Input from 'components/Input';
 
 interface Props {
   close: () => void;
-  ids: string[];
+  id: string;
 }
 
-const CreateLicense = ({ close, ids }: Props) => {
-  const [formData, setFormData] = useState({ productId: ids[0], organisationId: ids[1], expiry: '', count: '1' });
+const CreateLicense = ({ close, id }: Props) => {
+  const [formData, setFormData] = useState({ publicPrivateId: id, expiry: '', count: '1', name: '', email: '' });
 
   const { mutate: createLicense } = useMutation((data: any) => mutate('generatelicense', data), {
     onSuccess: () => {
@@ -36,9 +36,10 @@ const CreateLicense = ({ close, ids }: Props) => {
   return (
     <Modal title="Create License" close={close}>
       <form onSubmit={handleSubmit}>
+        <Input label="Name" name="name" value={formData.name} onChange={handleChange} />
+        <Input label="Email" name="email" value={formData.email} onChange={handleChange} />
         <Input label="Expiry" name="expiry" type="date" value={formData.expiry} onChange={handleChange} />
         <Input label="Count" name="count" value={formData.count} onChange={handleChange} />
-
         <div className="mt-2">
           <Button>Submit</Button>
         </div>

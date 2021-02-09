@@ -43,7 +43,7 @@ const GenerateToken = (props: Props) => {
         <Button onClick={() => setOpen(true)}>Create</Button>
       </div>
       <div>
-        {data.map((e: any) => (
+        {data?.map((e: any) => (
           <div className="border border-solid border-gray-400 rounded" key={e.id}>
             <div>Created: {e.createdDate}</div>
             <div>Expiry: {e.expiryDate}</div>

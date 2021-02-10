@@ -11,7 +11,7 @@ const Navbar = (props: Props) => {
     <div className="flex p-2 bg-color1 text-white">
       <Link to="/">License Manager</Link>
       <div className="ml-2 flex flex-1 justify-between">
-        <Link to="generatetoken">Generate Token</Link>
+        <Link to="/generatetoken">Generate Token</Link>
         <div className="cursor-pointer" onClick={() => dispatch(loginFail())}>
           Logout
         </div>

@@ -7,6 +7,7 @@ import Button from 'components/Button';
 import Input from 'components/Input';
 import Select from 'components/Select';
 import { produce } from 'immer';
+import Copy from 'components/Copy';
 
 interface Props {}
 
@@ -21,6 +22,11 @@ const GenerateToken = (props: Props) => {
     onSuccess: () => {
       refetch();
       setOpen(false);
+    },
+  });
+  const { mutate: deleteToken } = useMutation((data: any) => mutate('deletetokenforlicensechange/' + data, null, 'delete'), {
+    onSuccess: () => {
+      refetch();
     },
   });
 
@@ -42,12 +48,21 @@ const GenerateToken = (props: Props) => {
       <div>
         <Button onClick={() => setOpen(true)}>Create</Button>
       </div>
-      <div>
+      <div className="mt-2">
         {data?.map((e: any) => (
-          <div className="border border-solid border-gray-400 rounded" key={e.id}>
+          <div className="relative border border-solid border-gray-400 rounded p-1 mb-2" key={e.id}>
             <div>Created: {e.createdDate}</div>
             <div>Expiry: {e.expiryDate}</div>
-            <div>Token: {e.guid}</div>
+            <div>
+              <Copy value={e.guid} /> Token: {e.guid}
+            </div>
+            <i
+              onClick={() => {
+                if (!window.confirm('This willdelete the token! Continue?')) return;
+                deleteToken(e.guid);
+              }}
+              className="fa fa-trash absolute top-0.5 right-0.5 cursor-pointer text-red-600"
+            ></i>
           </div>
         ))}
       </div>
@@ -75,7 +90,7 @@ const GenerateToken = (props: Props) => {
               options={products || []}
               className="mt-2"
             />
-            <Input label="Expiry" name="expiryDate" type="date" value={formData.expiryDate} onChange={handleChange} />
+            <Input label="Expiry" name="expiryDate" type="datetime-local" value={formData.expiryDate} onChange={handleChange} />
             <div className="mt-2">
               <Button>Submit</Button>
             </div>

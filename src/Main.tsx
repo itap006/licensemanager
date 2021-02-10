@@ -17,12 +17,12 @@ const Main = (props: Props) => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/generatetoken" component={GenerateToken} />
-        <Route exact path="/products" component={Products} />
-        <Route exact path="/organisations" component={Organisations} />
-        <Route exact path="/productorganisations" component={POs} />
-        <Route exact path="/productorganisation/:pId/:oId" component={PPs} />
-        <Route exact path="/license/:id" component={Licenses} />
+        <Route path="/generatetoken" component={GenerateToken} />
+        <Route path="/products" component={Products} />
+        <Route path="/organisations" component={Organisations} />
+        <Route path="/productorganisations" component={POs} />
+        <Route path="/productorganisation/:pId/:oId" component={PPs} />
+        <Route path="/license/:id" component={Licenses} />
       </Switch>
     </div>
   );

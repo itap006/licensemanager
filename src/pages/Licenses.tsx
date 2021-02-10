@@ -1,4 +1,5 @@
 import Button from 'components/Button';
+import Copy from 'components/Copy';
 import Divider from 'components/Divider';
 import Container from 'layout/Container';
 import React, { useState } from 'react';
@@ -20,12 +21,15 @@ const Licenses = () => {
       </div>
       <div className="mt-2 flex flex-wrap">
         {data?.map((e) => (
-          <div key={e.id} className="p-3 rounded mb-3 w-max ml-2 border border-solid border-gray-400">
-            <div className="mb-2">Created: {e.createdDate}</div>
+          <div key={e.id} className="text-sm p-3 rounded mb-3 w-max ml-2 border border-solid border-gray-400">
+            <div className="">Created: {e.createdDate}</div>
             <div className="w-60 break-words">Name: {e.name}</div>
             <div className="w-60 break-words">Email: {e.email}</div>
             <Divider />
-            <div className="w-60 break-words">{e.licenseKey}</div>
+            <div className="w-60 break-words text-xs">
+              <Copy value={e.licenseKey} />
+              {e.licenseKey}
+            </div>
           </div>
         ))}
       </div>
